@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["mongoDb"]
+
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Server {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  uniqueName String @unique 
+  name String
+  region String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  serverStatus ServerStatus[]
+}
+
+model ServerStatus {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt @default(now())
+
+  status String
+
+  server   Server @relation(fields: [serverId], references: [id])
+  serverId String @db.ObjectId
+}

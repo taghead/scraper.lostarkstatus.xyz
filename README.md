@@ -1,2 +1,9 @@
-# scraper.lostarkstatus.xyz
-Scaper for https://github.com/taghead/lostarkstatus.xyz
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm run dev
+# or
+yarn dev
+```
